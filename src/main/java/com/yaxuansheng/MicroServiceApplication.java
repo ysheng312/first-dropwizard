@@ -31,6 +31,9 @@ public class MicroServiceApplication extends Application<MicroServiceConfigurati
             configuration.getTemplate(),
             configuration.getDefaultName()
         );
+        final TemplateHealthCheck healthCheck =
+            new TemplateHealthCheck(configuration.getTemplate());
+        environment.healthChecks().register("template", healthCheck);
         environment.jersey().register(resource);
     }
 }
